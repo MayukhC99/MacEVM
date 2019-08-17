@@ -1,0 +1,1 @@
+cd /d c:\ && mkdir macevm && cls && exit

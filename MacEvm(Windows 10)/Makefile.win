@@ -1,0 +1,36 @@
+# Project: Admin
+# Makefile created by Dev-C++ 5.11
+
+CPP      = g++.exe
+CC       = gcc.exe
+WINDRES  = windres.exe
+RES      = Admin_private.res
+OBJ      = ../EVM/Admin.o ../EVM/script.o $(RES)
+LINKOBJ  = ../EVM/Admin.o ../EVM/script.o $(RES)
+LIBS     = -L"C:/Program Files (x86)/Dev-Cpp/MinGW64/lib32" -L"C:/Program Files (x86)/Dev-Cpp/MinGW64/x86_64-w64-mingw32/lib32" -static-libgcc -m32
+INCS     = -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/include" -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/x86_64-w64-mingw32/include" -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/lib/gcc/x86_64-w64-mingw32/4.9.2/include"
+CXXINCS  = -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/include" -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/x86_64-w64-mingw32/include" -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/lib/gcc/x86_64-w64-mingw32/4.9.2/include" -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/lib/gcc/x86_64-w64-mingw32/4.9.2/include/c++"
+BIN      = Admin.exe
+CXXFLAGS = $(CXXINCS) -m32
+CFLAGS   = $(INCS) -m32
+RM       = rm.exe -f
+
+.PHONY: all all-before all-after clean clean-custom
+
+all: all-before $(BIN) all-after
+
+clean: clean-custom
+	${RM} $(OBJ) $(BIN)
+
+$(BIN): $(OBJ)
+	$(CPP) $(LINKOBJ) -o $(BIN) $(LIBS)
+
+../EVM/Admin.o: ../EVM/Admin.cpp
+	$(CPP) -c ../EVM/Admin.cpp -o ../EVM/Admin.o $(CXXFLAGS)
+
+../EVM/script.o: ../EVM/script.cpp
+	$(CPP) -c ../EVM/script.cpp -o ../EVM/script.o $(CXXFLAGS)
+
+Admin_private.res: Admin_private.rc 
+	$(WINDRES) -i Admin_private.rc -F pe-i386 --input-format=rc -o Admin_private.res -O coff 
+
